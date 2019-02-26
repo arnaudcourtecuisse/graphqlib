@@ -1,4 +1,4 @@
-#GraphQLib
+# GraphQLib
 
 GraphQLib is a GraphQL client library for node.js that includes a dynamic request builder with fragments support.
 

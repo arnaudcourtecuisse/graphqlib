@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const { parseResponse } = require('../lib/response-parser');
 
 
-describe('GraphQL response Parser', () => {
+describe('GraphQLib response parser', () => {
   it('should return the content of the data property', () => {
     const data = {};
     expect(parseResponse({ data })).to.deep.equal(data);

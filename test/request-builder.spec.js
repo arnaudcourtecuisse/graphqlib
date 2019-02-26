@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const rb = require('../lib/request-builder');
 
-describe('GraphQL request builder', () => {
+describe('GraphQLib request builder', () => {
   describe('createField', () => {
     it('should return a structured field', () => {
       expect(rb.createField('test')).to.deep.equal({ name: 'test', _isGQLField: true });
