@@ -1,0 +1,26 @@
+{
+  "name": "graphqlib",
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "repository": "https://github.com/cyctemic/graphqlib",
+  "description": "A GraphQL client library to build requests dynamically",
+  "author": "Arnaud Courtecuisse <arnaud.courtecuisse@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "mocha": "^6.0.1"
+  },
+  "scripts": {
+    "pretest": "eslint .",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "moment-timezone": "^0.5.23",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
+}
