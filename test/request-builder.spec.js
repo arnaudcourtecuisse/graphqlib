@@ -10,7 +10,7 @@ describe('GraphQLib request builder', () => {
 
   describe('createEnumArgument', () => {
     it('should return a structured enum value', () => {
-      expect(rb.createEnumArgument('foo')).to.deep.equal({ name: 'foo', enum: true });
+      expect(rb.createEnumArgument('foo')).to.deep.equal({ name: 'foo', _isGQLEnum: true });
     });
   });
 
@@ -31,6 +31,14 @@ describe('GraphQLib request builder', () => {
           rb.addArgs({ foo: 42 })(baseField)
         ).to.deep.equal(
           { name: 'test', _isGQLField: true, args: { foo: 42 } }
+        );
+      });
+
+      it('should eliminate null and undefined argument values', () => {
+        expect(
+          rb.addArgs({ real: 42, foo: null, bar: undefined })(baseField)
+        ).to.deep.equal(
+          { name: 'test', _isGQLField: true, args: { real: 42 } }
         );
       });
 
