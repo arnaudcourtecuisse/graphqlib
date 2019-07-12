@@ -42,6 +42,13 @@ describe('GraphQLib request builder', () => {
         );
       });
 
+      it('should throw an error when provided invalid types', () => {
+        expect(() => rb.addArgs(42)(baseField)).to.throw();
+        expect(() => rb.addArgs('foo')(baseField)).to.throw();
+        expect(() => rb.addArgs(() => {})(baseField)).to.throw();
+        expect(() => rb.addArgs({ foo: () => {} })(baseField)).to.throw();
+      });
+
       it('should merge args with existing ones', () => {
         const fieldWithArgs = rb.addArgs({ foo: 42 })(baseField);
         expect(
