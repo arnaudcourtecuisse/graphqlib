@@ -9,17 +9,17 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "mocha": "^6.1.4"
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "mocha": "^6.2.0"
   },
   "scripts": {
     "pretest": "eslint .",
     "test": "mocha"
   },
   "dependencies": {
-    "lodash": "^4.17.11",
-    "moment-timezone": "^0.5.23",
+    "lodash": "^4.17.15",
+    "moment-timezone": "^0.5.26",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
   }
