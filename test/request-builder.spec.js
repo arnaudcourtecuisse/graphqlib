@@ -8,6 +8,38 @@ describe('GraphQLib request builder', () => {
     });
   });
 
+  describe('setAlias', () => {
+    it('should return a function', () => {
+      expect(rb.setAlias('beautiful')).to.be.a('function');
+    });
+
+    describe('returned function', () => {
+      const makeBeautiful = rb.setAlias('beautiful');
+      const baseField = rb.createField('ugly');
+
+      it('should not modify inputs', () => {
+        expect(makeBeautiful(baseField)).not.to.equal(baseField);
+      });
+
+      it('should set alias to the field', () => {
+        expect(
+          makeBeautiful(baseField)
+        ).to.deep.equal(
+          { name: 'ugly', _isGQLField: true, alias: 'beautiful' }
+        );
+      });
+
+      it('should keep the last provided alias', () => {
+        const makeSpecial = rb.setAlias('special');
+        expect(
+          makeSpecial(makeBeautiful(baseField))
+        ).to.deep.equal(
+          { name: 'ugly', _isGQLField: true, alias: 'special' }
+        );
+      });
+    });
+  });
+
   describe('createEnumArgument', () => {
     it('should return a structured enum value', () => {
       expect(rb.createEnumArgument('foo')).to.deep.equal({ name: 'foo', _isGQLEnum: true });
@@ -169,10 +201,16 @@ describe('GraphQLib request builder', () => {
     it('should return a string', () => {
       expect(rb.getFieldRepr(baseField)).to.be.a('string');
     });
-    it('should represent the fields name', () => {
+    it('should represent the field\'s name', () => {
       expect(rb.getFieldRepr(baseField)).to.equal('test');
     });
-    it('should represent the fields arguments', () => {
+    it('should represent the field\'s alias', () => {
+      expect(
+        rb.getFieldRepr(rb.setAlias('foo')(baseField))
+      ).to.equal('foo:test');
+    });
+
+    it('should represent the field\'s arguments', () => {
       const args = {
         foo: 42,
         bar: 'bu',
@@ -186,14 +224,14 @@ describe('GraphQLib request builder', () => {
         'test(foo:42,bar:"bu",baz:"1970-01-01T00:00:00.000Z",qux:{quux:false,quuz:true},enum:ENUM)'
       );
     });
-    it('should represent the fields subfields', () => {
+    it('should represent the field\'s subfields', () => {
       expect(
         rb.getFieldRepr(rb.addSubfields('subtest')(baseField))
       ).to.equal(
         'test{subtest}'
       );
     });
-    it('should represent the fields fragments', () => {
+    it('should represent the field\'s fragments', () => {
       expect(
         rb.getFieldRepr(rb.addFragments('fragtest')(baseField))
       ).to.equal(

@@ -29,5 +29,10 @@ describe('GraphQLib response parser', () => {
     )).to.deep.equal(
       { foo: [['bar']] }
     );
+    expect(parseResponse(
+      { data: { edges: [{ node: { foo: { edges: [{ node: 'bar' }] } } }] } }
+    )).to.deep.equal(
+      [{ foo: ['bar'] }]
+    );
   });
 });
